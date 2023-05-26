@@ -21,26 +21,27 @@
 
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="static/img/favicon.png">
+	<link rel="shortcut icon" type="image/png" href="{% static '/img/favicon.png' %}">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-	<!-- fontawesome -->
-	<link rel="stylesheet" href="static/styles/all.min.css">
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
-	<!-- owl carousel -->
-	<link rel="stylesheet" href="static/styles/owl.carousel.css">
-	<!-- magnific popup -->
-	<link rel="stylesheet" href="static/styles/magnific-popup.css">
-	<!-- animate css -->
-	<link rel="stylesheet" href="static/styles/animate.css">
-	<!-- mean menu css -->
-	<link rel="stylesheet" href="static/styles/meanmenu.min.css">
-	<!-- main style -->
-	<link rel="stylesheet" href="{% static 'styles/main.css' %}" />
-	<!-- responsive -->
-	<link rel="stylesheet" href="static/styles/responsive.css">
+<!-- fontawesome -->
+<link rel="stylesheet" href="{% static 'styles/all.min.css' %}">
+<!-- bootstrap -->
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<!-- owl carousel -->
+<link rel="stylesheet" href="{% static 'styles/owl.carousel.css' %}">
+<!-- magnific popup -->
+<link rel="stylesheet" href="{% static 'styles/magnific-popup.css' %}">
+<!-- animate css -->
+<link rel="stylesheet" href="{% static 'styles/animate.css' %}">
+<!-- mean menu css -->
+<link rel="stylesheet" href="{% static 'styles/meanmenu.min.css' %}">
+<!-- main style -->
+<link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+<!-- responsive -->
+<link rel="stylesheet" href="{% static 'styles/responsive.css' %}">
+
 
 </head>
 
@@ -62,8 +63,8 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
-								<img src="static/img/logo.png" alt="">
+							<a href="{% url 'mainPage' %}">
+								<img src="{% static 'img/logo.png'%}" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -71,21 +72,23 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a></li>
-								<li><a href="about.html">Browse</a></li>
-								<li><a href="#">My Recipes</a>
+								<li{% if current_page == 'mainPage' %} class="current-list-item"{% endif %}><a href="{% url 'mainPage' %}">Home</a></li>
+								<li{% if current_page == 'browse' %} class="current-list-item"{% endif %}><a href="{% url 'browse' %}">Browse</a></li>
+								<li>
+									<a href="#">My Recipes</a>
 									<ul class="sub-menu">
-										<li><a href="404.html">Browse your recipes</a></li>
-										<li><a href="about.html">Create a recipe</a></li>
+										<li{% if current_page == 'myrecipes' %} class="current-list-item"{% endif %}><a href="{% url 'myrecipes' %}">Browse your recipes</a></li>
+										<li{% if current_page == 'create' %} class="current-list-item"{% endif %}><a href="{% url 'create' %}">Create a recipe</a></li>
 									</ul>
 								</li>
 								<li>
 									<div class="header-icons">
-										<a class="mobile-hide search-bar-icon" href="#"><i
-												class="fas fa-search"></i></a>
-										<a class="shopping-cart" href="cart.html"><i class="fas fa-heart"></i></a>
-										<a class="shopping-cart" href="cart.html"><i class="fas  fa-user"></i></a>
+										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										<a class="shopping-cart" href="{% url 'favorites' %}"><i class="fas fa-heart"></i></a>
+										<a class="shopping-cart" href="{% url 'myaccount' %}"><i class="fas fa-user"></i></a>
 									</div>
+								</li>
+								
 								</li>
 							</ul>
 						</nav>
@@ -117,7 +120,7 @@
 		</div>
 	</div>
 	<!-- end search area -->
-
+{% block content %}
 	<!-- hero area -->
 	<div class="hero-area hero-bg">
 		<div class="container">
@@ -126,9 +129,9 @@
 					<div class="hero-text">
 						<div class="hero-text-tablecell">
 							<p class="subtitle">Science Backed</p>
-							<h1>Delicious Protein Rich recipies</h1>
+							<h1>Protein Rich recipies</h1>
 							<div class="hero-btns">
-								<a href="shop.html" class="boxed-btn">Browse recipies</a>
+								<a href="{% url 'browse' %}" class="boxed-btn">Browse recipies</a>
 								<a href="contact.html" class="bordered-btn">My Favourites</a>
 							</div>
 						</div>
@@ -165,16 +168,15 @@
 				<!--Image Column-->
 				<div class="image-column col-lg-6">
 					<div class="image">
-						<img src="static/img/proteinBars.webp" alt="">
+						<img src="{% static 'img/proteinBars.webp' %}" alt="">
 					</div>
 				</div>
 				<!--Content Column-->
 				<div class="content-column col-lg-6">
 					<h3><span class="orange-text">Recipe</span> of the month</h3>
 					<h4>PROTEIN BARS</h4>
-					<div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique!
-						Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit
-						voluptatem accusant</div>
+					<div class="text">Whip up our homemade protein bars for a healthy, on-the-go snack! Packed with 
+						quality ingredients and a boost of protein, they're the perfect blend of taste and nutrition.</div>
 					<a href="cart.html" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 				</div>
 			</div>
@@ -190,7 +192,7 @@
 					<div class="testimonial-sliders">
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="static/img/avaters/avatar1.jpg" alt="">
+								<img src="{% static '/img/avaters/avatar1.jpg' %}" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Noel Deyzel<span>Fitness influencer</span></h3>
@@ -205,7 +207,7 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="static/img/avaters/avatar2.jpg" alt="">
+								<img src="{% static '/img/avaters/avatar2.jpg' %}" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Chris Bumstead<span>IFBB professional bodybuilder</span></h3>
@@ -220,7 +222,7 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="static/img/avaters/avatar3.jpg" alt="">
+								<img src="{% static '/img/avaters/avatar3.jpg' %}" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Jeff Nippard <span>Youtuber</span></h3>
@@ -274,10 +276,12 @@
 		<div class="container">
 			<h3>Summer collection dropped! <br> with new <span class="orange-text">Recipes...</span></h3>
 			<div class="sale-percent"><span>Available <br> for the next</span>3 <span>months</span></div>
-			<a href="shop.html" class="cart-btn btn-lg">Browse</a>
+			<a href="{% url 'browse' %}" class="cart-btn btn-lg">Browse</a>
 		</div>
 	</section>
 	<!-- end shop banner -->
+
+{% endblock %}
 
 	<!-- footer -->
 	<div class="footer-area">
@@ -286,8 +290,9 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium
-							doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+						<p>At Protein Palace, we believe that good health is the cornerstone of a fulfilling life. Our company is founded on the morals and ideals of 
+							promoting holistic well-being through science-based nutrition and protein-rich recipes. 
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
@@ -304,7 +309,7 @@
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{% url 'mainPage' %}">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="services.html">Shop</a></li>
 							<li><a href="news.html">News</a></li>
@@ -316,7 +321,7 @@
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
+						<form action="{% url 'mainPage' %}">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
@@ -352,26 +357,27 @@
 	</div>
 	<!-- end copyright -->
 
-	<!-- jquery -->
-	<script src="static/scripts/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="static/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="static/scripts/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="static/scripts/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="static/scripts/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="static/scripts/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="static/scripts/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="static/scripts/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="static/scripts/sticker.js"></script>
-	<!-- main js -->
-	<script src="static/scripts/main.js"></script>
+<!-- jquery -->
+<script src="{% static 'scripts/jquery-1.11.3.min.js' %}"></script>
+<!-- bootstrap -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- count down -->
+<script src="{% static 'scripts/jquery.countdown.js' %}"></script>
+<!-- isotope -->
+<script src="{% static 'scripts/jquery.isotope-3.0.6.min.js' %}"></script>
+<!-- waypoints -->
+<script src="{% static 'scripts/waypoints.js' %}"></script>
+<!-- owl carousel -->
+<script src="{% static 'scripts/owl.carousel.min.js' %}"></script>
+<!-- magnific popup -->
+<script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
+<!-- mean menu -->
+<script src="{% static 'scripts/jquery.meanmenu.min.js' %}"></script>
+<!-- sticker js -->
+<script src="{% static 'scripts/sticker.js' %}"></script>
+<!-- main js -->
+<script src="{% static 'scripts/main.js' %}"></script>
+
 
 </body>
 
