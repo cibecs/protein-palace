@@ -14,7 +14,7 @@
 
 	<!-- title -->
 	{% if title %}
-	<title>Protein Palace - {{ title }}</title>
+	<title>{{ title }} - Protein Palace</title>
 	{% else %}
 	<title>Protein Palace</title>
 	{% endif %}
@@ -132,7 +132,7 @@
 							<h1>Protein Rich recipies</h1>
 							<div class="hero-btns">
 								<a href="{% url 'browse' %}" class="boxed-btn">Browse recipies</a>
-								<a href="contact.html" class="bordered-btn">My Favourites</a>
+								<a href="{% url 'favorites' %}" class="bordered-btn">My Favourites</a>
 							</div>
 						</div>
 					</div>
