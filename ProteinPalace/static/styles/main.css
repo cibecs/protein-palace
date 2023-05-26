@@ -457,12 +457,12 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
 
 .section-title p {
   font-size: 15px;
-  width: 530px;
   margin: 0 auto;
   color: #555;
   margin-top: 10px;
   line-height: 1.8;
-}
+  text-align: center !important; 
+}; 
 
 .section-title {
   margin-bottom: 80px;
