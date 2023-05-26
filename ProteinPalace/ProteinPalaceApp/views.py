@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-def mainPage(request):
+def home(request):
     myDict = {
         "title": "Home",
         "current_page": "home",
     }
-    return render(request,'index.html')
+    return render(request,'index.html', context=myDict)
 
 def browse(request):
     myDict = {

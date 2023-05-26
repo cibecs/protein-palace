@@ -63,7 +63,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="{% url 'mainPage' %}">
+							<a href="{% url 'home' %}">
 								<img src="{% static 'img/logo.png'%}" alt="">
 							</a>
 						</div>
@@ -72,7 +72,7 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li{% if current_page == 'mainPage' %} class="current-list-item"{% endif %}><a href="{% url 'mainPage' %}">Home</a></li>
+								<li{% if current_page == 'home' %} class="current-list-item"{% endif %}><a href="{% url 'home' %}">Home</a></li>
 								<li{% if current_page == 'browse' %} class="current-list-item"{% endif %}><a href="{% url 'browse' %}">Browse</a></li>
 								<li>
 									<a href="#">My Recipes</a>
@@ -274,7 +274,7 @@
 	<!-- shop banner -->
 	<section class="shop-banner">
 		<div class="container">
-			<h3>Summer collection dropped! <br> with new <span class="orange-text">Recipes...</span></h3>
+			<h3>Summer collection dropped! <br> With NEW <span class="orange-text">Recipes...</span></h3>
 			<div class="sale-percent"><span>Available <br> for the next</span>3 <span>months</span></div>
 			<a href="{% url 'browse' %}" class="cart-btn btn-lg">Browse</a>
 		</div>
@@ -309,11 +309,11 @@
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="{% url 'mainPage' %}">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="{% url 'browse' %}">Browse</a></li>
+							<li><a href="{% url 'myrecipes' %}">My recipes</a></li>
+							<li><a href="{% url 'favorites' %}">Favorites</a></li>
+							<li><a href="{% url 'myaccount' %}">My account</a></li>
 						</ul>
 					</div>
 				</div>
@@ -321,7 +321,7 @@
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="{% url 'mainPage' %}">
+						<form action="{% url 'home' %}">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
