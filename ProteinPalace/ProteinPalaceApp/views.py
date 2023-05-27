@@ -25,7 +25,7 @@ def browse(request):
 
     myDict = {
         "title": "Browse",
-        "current_page": "browse",
+        "current_page": "browse",  # Set current_page to 'browse'
         "num": num,
         "recipes": page,
         "max_recipes_per_page": max_recipes_per_page,
@@ -48,8 +48,8 @@ def following(request):
     max_pages = paginator.num_pages
 
     myDict = {
-        "title": "Following",
-        "current_page": "following",
+        "title": "Browse",
+        "current_page": "following",  # Set current_page to 'following'
         "num": num,
         "recipes": page,
         "max_recipes_per_page": max_recipes_per_page,

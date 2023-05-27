@@ -10,11 +10,15 @@
                     <p>The best recipes</p>
                     <h1>Browse Healthy Recipes</h1>
                 </div>
+                <!-- FIXME -->
                 <div class="hero-btns">
+                    {% block hero-btns %}
                     <a href="{% url 'browse' %}" class="boxed-btn">Browse all</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'following' %}" class="bordered-btn">Followed</a>
                     {% endif %}
+                    </div>
+                    {% endblock %}
                 </div>
                 
             </div>

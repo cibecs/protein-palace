@@ -1,2 +1,9 @@
 {% extends "browse.html" %}
 
+{% block hero-btns %}
+<a href="{% url 'browse' %}" class="bordered-btn">Browse all</a>
+{% if user.is_authenticated %}
+    <a href="{% url 'following' %}" class="boxed-btn">Followed</a>
+{% endif %}
+</div>
+{% endblock %}
