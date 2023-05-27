@@ -30,14 +30,13 @@
                         <h3><a href="single-news.html">{{ recipe.name }}</a></h3>
                         <p class="blog-meta">
                             <span class="author"><i class="fas fa-user"></i> {{ recipe.user.username }}</span>
-                            <span class="date"><i class="fas fa-calendar"></i> {{ recipe.created_date }}</span>
+                            <span class="date"><i class="fas fa-calendar"></i> {{ recipe.createdAt }}</span>
                         </p>
                         <p class="excerpt">{{ recipe.description }}</p>
                         <a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
             </div>
-            
             {% endfor %}
         </div>
 

@@ -30,13 +30,15 @@ class UserProfile(models.Model):
         return self.user.username
 
 class Recipe(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to=recipe_image_filename)
     description = models.TextField()
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    comments = models.ManyToManyField('Comment', blank = True) #we can create a recipe without comments
+    comments = models.ManyToManyField('Comment', blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         return self.name
 
