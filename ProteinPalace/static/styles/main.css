@@ -227,10 +227,27 @@ p:last-child {
   animation: none;
 }
 
-.error-message {
-  display: none;
-  color: red;
+.alert-container {
+  position: fixed;
+  top: 100px; /* Adjust this value as needed */
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
 }
+
+.custom-alert {
+  width: 100%;
+  max-width: 500px; /* Adjust this value as needed */
+}
+
+.custom-alert .alert {
+  margin-top: 0;
+}
+
+
+
 
 @-webkit-keyframes spinLeft {
   from {

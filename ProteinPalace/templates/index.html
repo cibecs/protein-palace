@@ -57,11 +57,19 @@
 	<!--Messages-->
 	{% if messages %}
 		{% for message in messages %}
-			<div class="alert alert-{{ message.tags }}">
-				{{ message }}
-			</div>
+			<div class="alert-container">
+				<div class="custom-alert">
+				  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+					{{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				</div>
+			  </div>
 		{% endfor %}
 	{% endif %}
+	
 	<!--Messages Ends-->
 	{% block body %}
 	<!-- header -->
@@ -137,6 +145,9 @@
 		</div>
 	</div>
 	<!-- end search area -->
+
+
+
 {% block content %}
 	<!-- hero area -->
 	<div class="hero-area hero-bg">
