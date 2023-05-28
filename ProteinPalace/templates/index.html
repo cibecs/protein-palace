@@ -54,6 +54,15 @@
 		</div>
 	</div>
 	<!--PreLoader Ends-->
+	<!--Messages-->
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	<!--Messages Ends-->
 	{% block body %}
 	<!-- header -->
 	<div class="top-header-area" id="sticker">

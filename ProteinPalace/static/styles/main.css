@@ -227,6 +227,11 @@ p:last-child {
   animation: none;
 }
 
+.error-message {
+  display: none;
+  color: red;
+}
+
 @-webkit-keyframes spinLeft {
   from {
     -webkit-transform: rotate(0deg);
