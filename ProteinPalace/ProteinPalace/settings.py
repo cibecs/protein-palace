@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #local apps
-    'ProteinPalaceApp',
+    'ProteinPalaceApp', 'users',
 ]
 
 MIDDLEWARE = [

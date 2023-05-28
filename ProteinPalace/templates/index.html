@@ -46,7 +46,7 @@
 </head>
 
 <body>
-
+	
 	<!--PreLoader-->
 	<div class="loader">
 		<div class="loader-inner">
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<!--PreLoader Ends-->
-
+	{% block body %}
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">
@@ -64,7 +64,7 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="{% url 'home' %}">
-								<img src="{% static 'img/logo.png'%}" alt="">
+								<img src="{% static 'img/logo.png' %}" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -74,18 +74,26 @@
 							<ul>
 								<li{% if current_page == 'home' %} class="current-list-item"{% endif %}><a href="{% url 'home' %}">Home</a></li>
 								<li{% if current_page == 'browse' %} class="current-list-item"{% endif %}><a href="{% url 'browse' %}">Browse</a></li>
+								{% if  user.is_authenticated %}
 								<li>
+									
 									<a href="#">My Recipes</a>
 									<ul class="sub-menu">
 										<li{% if current_page == 'myrecipes' %} class="current-list-item"{% endif %}><a href="{% url 'myrecipes' %}">Browse your recipes</a></li>
 										<li{% if current_page == 'create' %} class="current-list-item"{% endif %}><a href="{% url 'create' %}">Create a recipe</a></li>
 									</ul>
+									
 								</li>
+								{% endif %}
 								<li>
 									<div class="header-icons">
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										{% if  user.is_authenticated %}
 										<a class="shopping-cart" href="{% url 'favorites' %}"><i class="fas fa-heart"></i></a>
 										<a class="shopping-cart" href="{% url 'myaccount' %}"><i class="fas fa-user"></i></a>
+										{% else %}
+										<a class="shopping-cart" href="{% url 'login' %}">Login/Register</a>
+										{% endif %}
 									</div>
 								</li>
 								
@@ -132,7 +140,9 @@
 							<h1>Protein Rich recipies</h1>
 							<div class="hero-btns">
 								<a href="{% url 'browse' %}" class="boxed-btn">Browse recipies</a>
+								{% if user.is_authenticated %}
 								<a href="{% url 'favorites' %}" class="bordered-btn">My Favourites</a>
+								{% endif %}
 							</div>
 						</div>
 					</div>
@@ -356,6 +366,8 @@
 		</div>
 	</div>
 	<!-- end copyright -->
+
+{% endblock %}
 
 <!-- jquery -->
 <script src="{% static 'scripts/jquery-1.11.3.min.js' %}"></script>

@@ -609,6 +609,11 @@ nav.main-menu > ul li:last-child {
   max-width: 100px;
 }
 
+.login-logo {
+  float: right;
+  max-width: 200px;
+}
+
 ul.sub-menu li:last-child {
   float: none !important;
 }
