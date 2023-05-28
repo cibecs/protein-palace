@@ -44,4 +44,28 @@ class CustomUserRegisterForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
+class CustomUserLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length=30,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your username'})
+    )
+    password = forms.CharField(
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter your password'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Customize widget attributes
+        self.fields['username'].widget.attrs.update({'placeholder': 'Enter a username'})
+        self.fields['password'].widget.attrs.update({'placeholder': 'Enter a password'})
+
+    def label_from_instance(self, obj):
+        label = super().label_from_instance(obj)
+        return label.capitalize()

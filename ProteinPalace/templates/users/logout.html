@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<!-- hero area -->
+	<div class="hero-area hero-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1>You've succesfully logged out</h1>
+                            <p class="subtitle" style="font-size: 150%;">Click here to log back in</p>
+							<div class="hero-btns">
+								<a href="{% url 'login' %}" class="boxed-btn btn-lg">Login</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end hero area -->
+
+
+{% endblock %}
+```
