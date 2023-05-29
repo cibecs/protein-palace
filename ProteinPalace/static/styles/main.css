@@ -622,9 +622,9 @@ nav.main-menu ul li:last-child a {
   display: inline-block;
 }
 
-nav.main-menu > ul li:last-child {
+/* nav.main-menu > ul li:last-child {
   float: right;
-}
+} */
 
 .site-logo {
   float: left;
@@ -688,8 +688,17 @@ nav.mean-nav > ul > li:first-child > a {
 
 .header-icons a {
   color: #fff;
+
+  padding: 0;
+}
+
+.header-icons a i {
   display: inline-block;
-  padding: 10px;
+  padding: 0;
+}
+
+.user-icon{
+  margin-left: 10px;
 }
 
 .site-logo {
