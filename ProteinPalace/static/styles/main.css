@@ -1268,6 +1268,11 @@ div.owl-controls div.owl-nav div:hover {
   box-shadow: none;
 }
 
+.profile-container{
+  background-color: var(--website-background);
+  color: var(--website-text);
+}
+
 a.cart-btn {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;

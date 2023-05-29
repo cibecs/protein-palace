@@ -23,7 +23,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     following = models.ManyToManyField(User, related_name='followers', blank=True)
     favouriteRecipes = models.ManyToManyField('Recipe')
-    profilePicture = models.ImageField(upload_to=user_profile_picture_filename)
+    profilePicture = models.ImageField(upload_to=user_profile_picture_filename, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
     def __str__(self):
