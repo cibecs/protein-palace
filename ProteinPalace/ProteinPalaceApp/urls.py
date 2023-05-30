@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/', views.create, name = 'create'),
     path('favorites/', views.favorites, name = 'favorites'),
     path('following/', views.following, name = 'following'),
+    path('recipe/<int:pk>/', views.RecipeDetailView.as_view(template_name = "single-recipe.html"), name = 'recipe-detail'),
 ]

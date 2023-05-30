@@ -1,0 +1,110 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+	<!-- single article section -->
+	<div class="pt-150 pb-100" style = "background-color: var(--website-background);" >
+		<div class="container">
+			<div class="row pt-100 pb-100"  style = "background-color:white" >
+				<div class="col-lg-10 mx-auto">
+					<div class="single-article-section">
+						<div class="single-article-text">
+							<div class="single-artcile-bg" style="background-image: url('{{ recipe.image.url }}');"></div>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> {{ object.user}}</span>
+								<span class="date"><i class="fas fa-calendar"></i> {{ object.updatedAt }}</span>
+							</p>
+							<h2>{{ object.name }}</h2>
+							<p>
+								{{ object.description }}
+							</p>
+						</div>
+						<div>
+							<section>
+								<div class="py-12">
+								  <div class="row d-flex justify-content-center align-items-center">
+									<div class="col col-lg-12 col-xl-12 mt-150 mb-150">
+									  <div class="card">
+										<div class="rounded-top text-white d-flex flex-row" style=" height:200px;">
+											<div class=" ml-4 ms-4 mt-5 d-flex flex-column" style="width: 200px;">
+											  {% if user.userprofile.profilePicture %}
+											  <img src="{{ user.userprofile.profilePicture.url }}"
+											  alt="Profile Picture"
+											  class="img-fluid img-thumbnail mt-4 mb-2"
+											  style="width: 150px; z-index: 1">
+											  {% else %}
+											  <img src="{% static 'img/placeholder.webp' %}"
+											  alt="Profile Picture"
+											  class="img-fluid img-thumbnail mt-4 mb-2 ml-4"
+											  style="width: 150px; z-index: 1">
+											  {% endif %}          
+										  </div>
+										  <div class="ms-3" style="margin-top: 100px;">
+											<h3 style="color:white;">{{ user.first_name }} {{ user.last_name }}</h5>
+											<h6 style="color:white;">{{ user.username }}</h6>
+										  </div>
+										</div>
+										<div class="p-4 text-black" style="background-color: #f8f9fa;">
+
+										  <div class="d-flex justify-content-between text-center py-1">
+											<div class="hero-btns">
+												<a href="{% url 'browse' %}" class="boxed-btn">Browse all</a>
+													<a href="{% url 'following' %}" class="boxed-btn">Followed</a>
+											</div>
+											<div class="ml-auto d-flex">
+											  <div class="px-3">
+												<p class="mb-1 h3">{{ user.userprofile.user.followers.count }}</p>
+												<p class="medium text-muted mb-0">Followers</p>
+											  </div>
+											  <div class="px-3">
+												<p class="mb-1 h3">{{ user.userprofile.following.count }}</p>
+												<p class="medium text-muted mb-0">Following</p>
+											  </div>
+											  <div class="px-3">
+												<p class="mb-1 h3">{{ user.recipe_set.count }}</p>
+												<p class="medium text-muted mb-0">Shared Recipes</p>
+											  </div>
+											</div>
+										  </div>              
+										</div> 
+									</div>
+								</div>														
+							</section>   
+						</div>
+						<div class="comments-list-wrap">
+							<h3 class="comment-count-title">{{ recipe.comments.count }} Comments</h3>
+							<div class="comment-list">
+								{% for comment in recipe.comments.all %}
+								<div class="single-comment-body">
+									<div class="comment-user-avater">
+										<img src="{{ comment.user.userprofile.profilePicture.url }}" alt="Profile Picture">
+									</div>
+									<div class="comment-text-body">
+										<h4>{{ comment.user.username }} <span class="comment-date">{{ comment.postedAt|date:"F d, Y" }}</span> </h4>
+										<p class="h6">{{ comment.content }}</p>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						
+
+						<div class="comment-template">
+							<h4>Leave a comment</h4>
+							<p>If you have a comment dont feel hesitate to send us your opinion.</p>
+							<form action="index.html">
+								<p>
+									<h5>{{ user.first_name }} {{ user.last_name }}</h4>
+								</p>
+								<p><textarea name="comment" id="comment" cols="30" rows="10" placeholder="Your Message"></textarea></p>
+								<p><input type="submit" value="Submit"></p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single article section -->
+{% endblock %}

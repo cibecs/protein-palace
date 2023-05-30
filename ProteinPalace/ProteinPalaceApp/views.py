@@ -7,6 +7,8 @@ from .models import Recipe
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
+#added for the detail view class
+from django.views.generic import DetailView
 
 # Create your views here.
 def home(request):
@@ -37,6 +39,11 @@ def browse(request):
         "max_pages": max_pages,
     }
     return render(request, 'browse.html', context=myDict)
+
+class RecipeDetailView(DetailView): 
+    model = Recipe
+    
+
 
 @login_required
 def following(request):
