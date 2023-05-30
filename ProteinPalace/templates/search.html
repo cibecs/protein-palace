@@ -1,0 +1,11 @@
+{% extends "browse.html" %}
+{% block breadcrumb-text %}
+{% if recipes %}
+    <h2 style="color:white">Search Results for "{{ query }}":</h2>
+{% else %}
+    <p>No results found for "{{ query }}".</p>
+{% endif %}
+{% endblock %}
+
+{% block hero-btns %}
+{% endblock %}

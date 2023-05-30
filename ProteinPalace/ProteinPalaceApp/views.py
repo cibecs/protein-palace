@@ -12,6 +12,9 @@ from django.views.generic import DetailView, CreateView
 
 from django.shortcuts import redirect
 
+#added for search
+from django.db.models import Q
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -59,14 +62,19 @@ class RecipeDetailView(DetailView):
             user_profile.following.remove(recipe.user)  # Unfollow the recipe's user
         return redirect('recipe-detail', pk=recipe.pk)
 
-class RecipeCreateView(CreateView):
-    model = Recipe
-    fields = ['name', 'image', 'description', 'category']
-    template_name = 'create.html'
+def search(request):
+    query = request.GET.get('query')
+    recipes = Recipe.objects.filter(
+        Q(name__icontains=query) | 
+        Q(category__name__icontains=query) | 
+        Q(user__userprofile__user__username__icontains=query)
+    )
+    context = {
+        'recipes': recipes,
+        'query': query
+    }
+    return render(request, 'search.html', context)
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user  # Set the recipe's user to the current user
-        return super().form_valid
 
 @login_required
 def create_comment(request):
