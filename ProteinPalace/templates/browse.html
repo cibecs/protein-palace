@@ -37,17 +37,17 @@
             {% for recipe in recipes %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-latest-news">
-                    <a href="" "">
+                    <a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}">
                         <div class="latest-news-bg" style="background-image: url('{{ recipe.image.url }}');"></div>
                     </a>
                     <div class="news-text-box">
-                        <h3><a href="" "">{{ recipe.name }}</a></h3>
+                        <h3><a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}" >{{ recipe.name }}</a></h3>
                         <p class="blog-meta">
                             <span class="author"><i class="fas fa-user"></i> {{ recipe.user.username }}</span>
                             <span class="date"><i class="fas fa-calendar"></i> {{ recipe.createdAt }}</span>
                         </p>
                         <p class="excerpt">{{ recipe.description }}</p>
-                        <a href="" "" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                        <a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}"  class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
             </div>

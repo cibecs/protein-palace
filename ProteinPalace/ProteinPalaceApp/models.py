@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 import os
 from datetime import datetime
 
+from django.urls import reverse
+
 
 # Custom name for uploaded recipe images
 def recipe_image_filename(instance, filename):
@@ -41,6 +43,8 @@ class Recipe(models.Model):
     
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('recipe-detail', args=[str(self.pk)])
 
 
 class Comment(models.Model):

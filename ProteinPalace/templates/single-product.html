@@ -80,7 +80,7 @@
 								<li><a href="news.html">News</a>
 									<ul class="sub-menu">
 										<li><a href="news.html">News</a></li>
-										<li><a href="" "">Single News</a></li>
+										<li><a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}">Single News</a></li>
 									</ul>
 								</li>
 								<li><a href="contact.html">Contact</a></li>

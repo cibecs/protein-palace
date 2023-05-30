@@ -15,21 +15,28 @@
 								<span class="author"><i class="fas fa-user"></i> {{ object.user}}</span>
 								<span class="date"><i class="fas fa-calendar"></i> {{ object.updatedAt }}</span>
 							</p>
-							<h2>{{ object.name }}</h2>
+							<div class="d-flex align-items-center">
+								<h2 class="d-inline">{{ object.name }}</h2>
+								{% if request.user.is_authenticated and object in request.user.userprofile.favouriteRecipes.all %}
+								  <i class="fas fa-heart d-inline mb-2 ml-3" style="color: red;  font-size: 23px;"></i> <!-- User has favorited the recipe -->
+								{% else %}
+								  <i class="far fa-heart d-inline mb-2 ml-3" style="color: red; font-size: 23px;"></i> <!-- User has not favorited the recipe -->
+								{% endif %}
+							  </div>
+							
 							<p>
 								{{ object.description }}
 							</p>
 						</div>
 						<div>
-							<section>
-								<div class="py-12">
+								<div class="py-12 mt-3">
 								  <div class="row d-flex justify-content-center align-items-center">
-									<div class="col col-lg-12 col-xl-12 mt-150 mb-150">
+									<div class="col col-lg-12 col-xl-12">
 									  <div class="card">
-										<div class="rounded-top text-white d-flex flex-row" style=" height:200px;">
+										<div class="rounded-top text-white d-flex flex-row" style="background-color: #410001; height:200px;">
 											<div class=" ml-4 ms-4 mt-5 d-flex flex-column" style="width: 200px;">
-											  {% if user.userprofile.profilePicture %}
-											  <img src="{{ user.userprofile.profilePicture.url }}"
+											  {% if object.user.userprofile.profilePicture %}
+											  <img src="{{ object.user.userprofile.profilePicture.url }}"
 											  alt="Profile Picture"
 											  class="img-fluid img-thumbnail mt-4 mb-2"
 											  style="width: 150px; z-index: 1">
@@ -41,36 +48,34 @@
 											  {% endif %}          
 										  </div>
 										  <div class="ms-3" style="margin-top: 100px;">
-											<h3 style="color:white;">{{ user.first_name }} {{ user.last_name }}</h5>
-											<h6 style="color:white;">{{ user.username }}</h6>
+											<h3 style="color:white;">{{ object.user.first_name }} {{ object.user.last_name }}</h5>
+											<h6 style="color:white;">{{ object.user.username }}</h6>
 										  </div>
 										</div>
 										<div class="p-4 text-black" style="background-color: #f8f9fa;">
 
 										  <div class="d-flex justify-content-between text-center py-1">
-											<div class="hero-btns">
-												<a href="{% url 'browse' %}" class="boxed-btn">Browse all</a>
-													<a href="{% url 'following' %}" class="boxed-btn">Followed</a>
+											<div class="d-flex align-items-center">
+												<a href="{% url 'browse' %}" class="boxed-btn mr-1">Follow</a>
 											</div>
 											<div class="ml-auto d-flex">
 											  <div class="px-3">
-												<p class="mb-1 h3">{{ user.userprofile.user.followers.count }}</p>
+												<p class="mb-1 h3">{{ object.user.userprofile.user.followers.count }}</p>
 												<p class="medium text-muted mb-0">Followers</p>
 											  </div>
 											  <div class="px-3">
-												<p class="mb-1 h3">{{ user.userprofile.following.count }}</p>
+												<p class="mb-1 h3">{{ object.user.userprofile.following.count }}</p>
 												<p class="medium text-muted mb-0">Following</p>
 											  </div>
 											  <div class="px-3">
-												<p class="mb-1 h3">{{ user.recipe_set.count }}</p>
+												<p class="mb-1 h3">{{ object.user.recipe_set.count }}</p>
 												<p class="medium text-muted mb-0">Shared Recipes</p>
 											  </div>
 											</div>
 										  </div>              
 										</div> 
 									</div>
-								</div>														
-							</section>   
+								</div>														  
 						</div>
 						<div class="comments-list-wrap">
 							<h3 class="comment-count-title">{{ recipe.comments.count }} Comments</h3>
