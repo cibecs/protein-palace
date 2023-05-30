@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 #added for the detail view class
 from django.views.generic import DetailView
 
+from django.shortcuts import redirect
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -40,9 +42,25 @@ def browse(request):
     }
     return render(request, 'browse.html', context=myDict)
 
-class RecipeDetailView(DetailView): 
+class RecipeDetailView(DetailView):
     model = Recipe
-    
+    template_name = 'single-recipe.html'
+
+    def post(self, request, *args, **kwargs):
+        recipe = self.get_object()  # Get the recipe object
+        user_profile = request.user.userprofile  # Get the user's profile
+        if 'favorite' in request.POST:
+            user_profile.favouriteRecipes.add(recipe)  # Add recipe to favorites
+        elif 'unfavorite' in request.POST:
+            user_profile.favouriteRecipes.remove(recipe)  # Remove recipe from favorites
+        elif 'follow' in request.POST:
+            user_profile.following.add(recipe.user)  # Follow the recipe's user
+        elif 'unfollow' in request.POST:
+            user_profile.following.remove(recipe.user)  # Unfollow the recipe's user
+        return redirect('recipe-detail', pk=recipe.pk)
+
+
+
 
 
 @login_required

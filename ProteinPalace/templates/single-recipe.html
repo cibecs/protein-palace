@@ -16,13 +16,26 @@
 								<span class="date"><i class="fas fa-calendar"></i> {{ object.updatedAt }}</span>
 							</p>
 							<div class="d-flex align-items-center">
-								<h2 class="d-inline">{{ object.name }}</h2>
-								{% if request.user.is_authenticated and object in request.user.userprofile.favouriteRecipes.all %}
-								  <i class="fas fa-heart d-inline mb-2 ml-3" style="color: red;  font-size: 23px;"></i> <!-- User has favorited the recipe -->
-								{% else %}
-								  <i class="far fa-heart d-inline mb-2 ml-3" style="color: red; font-size: 23px;"></i> <!-- User has not favorited the recipe -->
-								{% endif %}
-							  </div>
+								<h3 class="d-inline">{{ object.name }}</h3>
+								<form action="{% url 'recipe-detail' object.pk %}" class= "mb-3 ml-1" method="POST">
+									{% csrf_token %}
+									{% if request.user.is_authenticated %}
+									  {% if object in request.user.userprofile.favouriteRecipes.all %}
+										<button type="submit" name="unfavorite" class="btn btn-link" style="color: red;font-size: 18px;">
+										  <i class="fas fa-heart"></i> Remove from Favorites
+										</button>
+									  {% else %}
+										<button type="submit" name="favorite" class="btn btn-link" style="color: red; font-size: 18px;">
+										  <i class="far fa-heart"></i> Add to Favorites
+										</button>
+									  {% endif %}
+									{% else %}
+									  <a href="{% url 'login' %}" class="btn btn-link" style="color: red;font-size: 18px;">
+										<i class="far fa-heart"></i> Add to Favorites
+									  </a>
+									{% endif %}
+								  </form>
+							</div>
 							
 							<p>
 								{{ object.description }}
@@ -56,7 +69,21 @@
 
 										  <div class="d-flex justify-content-between text-center py-1">
 											<div class="d-flex align-items-center">
-												<a href="{% url 'browse' %}" class="boxed-btn mr-1">Follow</a>
+												{% if request.user.is_authenticated %}
+												{% if request.user != recipe.user and recipe.user in request.user.userprofile.following.all %}
+													<form method="post">
+														{% csrf_token %}
+														<button type="submit" class="btn boxed-btn mr-1 btn-outline-danger  btn-lg" name="unfollow">Unfollow</button>
+													</form>
+												{% else %}
+													<form method="post">
+														{% csrf_token %}
+														<button type="submit" class="btn boxed-btn mr-1 btn-outline-danger active btn-lg" name="follow">Follow</button>
+													</form>
+												{% endif %}
+												{% else %}
+												<a href="{% url 'login' %}" class="btn boxed-btn mr-1 btn-outline-danger active btn-lg">Follow</a>
+												{% endif %}
 											</div>
 											<div class="ml-auto d-flex">
 											  <div class="px-3">
@@ -97,7 +124,7 @@
 
 						<div class="comment-template">
 							<h4>Leave a comment</h4>
-							<p>If you have a comment dont feel hesitate to send us your opinion.</p>
+							<p>Let {{ object.user.username }} know what you think of their recipe!</p>
 							<form action="index.html">
 								<p>
 									<h5>{{ user.first_name }} {{ user.last_name }}</h4>
