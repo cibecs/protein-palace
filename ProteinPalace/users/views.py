@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 
 #to create userProfile
 from ProteinPalaceApp.models import UserProfile
+from ProteinPalaceApp.models import Recipe
+
+from .forms import ProfilePictureForm
 
 def register(request):
     if request.method == 'POST':
@@ -32,7 +35,23 @@ def register(request):
 
 @login_required
 def profile(request):
-    myDict = {
-        "title": "Profile",
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile_picture = form.cleaned_data['profilePicture']
+            user_profile = request.user.userprofile
+            user_profile.profilePicture = profile_picture
+            user_profile.save()
+            return redirect('profile')
+    else:
+        form = ProfilePictureForm()
+
+    user = request.user
+    recipes = Recipe.objects.filter(user=user).order_by('-createdAt')[:3]
+    context = {
+        'user': user,
+        'title': 'Profile',
+        'recipes': recipes,
+        'form': form
     }
-    return render(request,'users/profile.html')
+    return render(request,'users/profile.html', context=context)

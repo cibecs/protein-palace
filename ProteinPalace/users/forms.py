@@ -10,6 +10,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from ProteinPalaceApp.models import UserProfile
+
 class CustomUserRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your first name'}))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your last name'}))
@@ -69,3 +71,13 @@ class CustomUserLoginForm(AuthenticationForm):
     def label_from_instance(self, obj):
         label = super().label_from_instance(obj)
         return label.capitalize()
+    
+class ProfilePictureForm(forms.ModelForm):
+    profilePicture = forms.ImageField(
+        label='Change profile picture',
+        widget=forms.ClearableFileInput(attrs={'class': 'btn ', 'accept': 'image/*'})
+    )
+    
+    class Meta:
+        model = UserProfile
+        fields = ('profilePicture',)
