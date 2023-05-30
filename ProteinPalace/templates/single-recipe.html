@@ -36,8 +36,8 @@
 									{% endif %}
 								  </form>
 							</div>
-							
-							<p>
+							<div class= "float-left font-italic text-muted" style="margin-top: -15px;"> {{ object.category }}</div>
+							<p class="pt-3 " style="font-size: 18px;">
 								{{ object.description }}
 							</p>
 						</div>
@@ -125,14 +125,17 @@
 						<div class="comment-template">
 							<h4>Leave a comment</h4>
 							<p>Let {{ object.user.username }} know what you think of their recipe!</p>
-							<form action="index.html">
+							<form method="POST" action="{% url 'comment-create' %}">
+								{% csrf_token %}
+								<input type="hidden" name="recipe_id" value="{{ object.id }}">
 								<p>
-									<h5>{{ user.first_name }} {{ user.last_name }}</h4>
+									<h5>{{ user.first_name }} {{ user.last_name }}</h5>
 								</p>
-								<p><textarea name="comment" id="comment" cols="30" rows="10" placeholder="Your Message"></textarea></p>
+								<p><textarea name="content" cols="30" rows="10" placeholder="Your Message"></textarea></p>
 								<p><input type="submit" value="Submit"></p>
 							</form>
 						</div>
+						
 					</div>
 				</div>
 			</div>

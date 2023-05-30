@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Recipe
+from .models import Recipe, Comment
 
 
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 #added for the detail view class
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
 from django.shortcuts import redirect
 
@@ -40,7 +40,7 @@ def browse(request):
         "page_range": page_range,
         "max_pages": max_pages,
     }
-    return render(request, 'browse.html', context=myDict)
+    return render(request, 'browse.html', context=myDict) 
 
 class RecipeDetailView(DetailView):
     model = Recipe
@@ -59,9 +59,24 @@ class RecipeDetailView(DetailView):
             user_profile.following.remove(recipe.user)  # Unfollow the recipe's user
         return redirect('recipe-detail', pk=recipe.pk)
 
+class RecipeCreateView(CreateView):
+    model = Recipe
+    fields = ['name', 'image', 'description', 'category']
+    template_name = 'create.html'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user  # Set the recipe's user to the current user
+        return super().form_valid
 
-
+@login_required
+def create_comment(request):
+    if request.method == 'POST':
+        recipe_id = request.POST.get('recipe_id')
+        content = request.POST.get('content')
+        recipe = Recipe.objects.get(id=recipe_id)
+        comment = Comment.objects.create(user=request.user, content=content)
+        recipe.comments.add(comment)
+    return redirect('recipe-detail', pk=recipe_id)
 
 @login_required
 def following(request):
