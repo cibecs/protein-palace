@@ -62,11 +62,52 @@ def following(request):
     }
     return render(request, 'browse-following.html', context=myDict)
 
-
+@login_required
 def myrecipes(request):
-    return HttpResponse("My Recipes")
+    num = int(request.GET.get('num', 1))  # 1 is the default value
+    max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
 
+    recipes = Recipe.objects.filter(user=request.user)
+    paginator = Paginator(recipes, max_recipes_per_page)
+
+    page = paginator.get_page(num)
+    page_range = paginator.page_range
+    max_pages = paginator.num_pages
+
+    myDict = {
+        "title": "myrecipes",
+        "current_page": "myrecipes",  
+        "num": num,
+        "recipes": page,
+        "max_recipes_per_page": max_recipes_per_page,
+        "page_range": page_range,
+        "max_pages": max_pages,
+    }
+    return render(request,'myrecipes.html', context = myDict)
+
+@login_required
 def create(request):
     return HttpResponse("Create")
+
+@login_required
 def favorites(request):
-    return HttpResponse("Favorites")
+    num = int(request.GET.get('num', 1))  # 1 is the default value
+    max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
+
+    recipes = request.user.userprofile.favouriteRecipes.all()
+    paginator = Paginator(recipes, max_recipes_per_page)
+
+    page = paginator.get_page(num)
+    page_range = paginator.page_range
+    max_pages = paginator.num_pages
+
+    myDict = {
+        "title": "Favorites",
+        "current_page": "favorites",  
+        "num": num,
+        "recipes": page,
+        "max_recipes_per_page": max_recipes_per_page,
+        "page_range": page_range,
+        "max_pages": max_pages,
+    }
+    return render(request,'favorites.html', context = myDict)
