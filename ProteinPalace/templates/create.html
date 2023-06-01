@@ -9,9 +9,14 @@
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-  
+                  {% if page == 'create' %}
                   <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-4 mt-4">Create a new recipe</p>
                   <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: var(--website-touches);">Share you delicious recipes with the world!</p>
+                  {% else %}
+                  <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-4 mt-4">Update your recipe</p>
+                  <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: var(--website-touches);">Edit your recipe fields</p>
+                  {% endif %}
+                  
   
                   <form class="mx-1 mx-md-4" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

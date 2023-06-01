@@ -86,6 +86,10 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = 'create'
+        return context
     
 class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Recipe
@@ -98,6 +102,10 @@ class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = 'update'
+        return context
     
 class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Recipe
@@ -107,6 +115,7 @@ class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     def test_func(self):
         recipe = self.get_object()
         return self.request.user == recipe.user
+        
 
 
 def search(request):
