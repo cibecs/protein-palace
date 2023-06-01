@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 #added for the detail view class
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, UpdateView
 
 from django.shortcuts import redirect
 

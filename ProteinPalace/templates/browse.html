@@ -46,7 +46,7 @@
                             <span class="author"><i class="fas fa-user"></i> {{ recipe.user.username }}</span>
                             <span class="date"><i class="fas fa-calendar"></i> {{ recipe.createdAt }}</span>
                         </p>
-                        <p class="excerpt">{{ recipe.description }}</p>
+                        <p class="excerpt">{{ recipe.description|truncatechars:200 }}</p>
                         <a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}"  class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
