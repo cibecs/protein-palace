@@ -22,6 +22,9 @@ from .forms import RecipeCreateForm
 #added for messages
 from django.contrib import messages
 
+#added for update recipe
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -75,6 +78,18 @@ class RecipeDetailView(DetailView):
 class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
     form_class = RecipeCreateForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
+    model = Recipe
+    form_class = RecipeCreateForm
+
+    def test_func(self):
+        recipe = self.get_object()
+        return self.request.user == recipe.user
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -173,3 +188,6 @@ def favorites(request):
         "max_pages": max_pages,
     }
     return render(request,'favorites.html', context = myDict)
+
+def error_404_view(request, exception):
+    return render(request, '404.html')

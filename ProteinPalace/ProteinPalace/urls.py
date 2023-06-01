@@ -12,7 +12,12 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from users.forms import CustomUserLoginForm
 
+from ProteinPalaceApp.views import error_404_view
 
+
+
+#added for 404 error: 
+handler404 = error_404_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
