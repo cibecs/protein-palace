@@ -15,6 +15,10 @@ from django.shortcuts import redirect
 #added for search
 from django.db.models import Q
 
+#added for Create recipe
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import RecipeCreateForm
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -61,6 +65,14 @@ class RecipeDetailView(DetailView):
         elif 'unfollow' in request.POST:
             user_profile.following.remove(recipe.user)  # Unfollow the recipe's user
         return redirect('recipe-detail', pk=recipe.pk)
+    
+class RecipeCreateView(LoginRequiredMixin, CreateView):
+    model = Recipe
+    form_class = RecipeCreateForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 def search(request):
     query = request.GET.get('query')
@@ -132,10 +144,6 @@ def myrecipes(request):
         "max_pages": max_pages,
     }
     return render(request,'myrecipes.html', context = myDict)
-
-@login_required
-def create(request):
-    return HttpResponse("Create")
 
 @login_required
 def favorites(request):

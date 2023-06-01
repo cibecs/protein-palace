@@ -97,7 +97,7 @@
 									<a href="#">My Recipes</a>
 									<ul class="sub-menu">
 										<li{% if current_page == 'myrecipes' %} class="current-list-item"{% endif %}><a href="{% url 'myrecipes' %}">Browse your recipes</a></li>
-										<li{% if current_page == 'create' %} class="current-list-item"{% endif %}><a href="{% url 'create' %}">Create a recipe</a></li>
+										<li{% if current_page == 'create' %} class="current-list-item"{% endif %}><a href="{% url 'recipe-create' %}">Create a recipe</a></li>
 									</ul>
 									
 								</li>
@@ -224,7 +224,7 @@
 					<h4>PROTEIN BARS</h4>
 					<div class="text">Whip up our homemade protein bars for a healthy, on-the-go snack! Packed with 
 						quality ingredients and a boost of protein, they're the perfect blend of taste and nutrition.</div>
-					<a href="cart.html" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					<a href="cart.html" class="cart-btn mt-3">View Recipe</a>
 				</div>
 			</div>
 		</div>
