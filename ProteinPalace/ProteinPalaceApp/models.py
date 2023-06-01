@@ -30,6 +30,19 @@ class UserProfile(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.user.username
+    #added to remove old profile picture when new one is uploaded
+    def save(self, *args, **kwargs):
+        # Check if the UserProfile instance already exists
+        try:
+            existing_instance = UserProfile.objects.get(id=self.id)
+        except UserProfile.DoesNotExist:
+            existing_instance = None
+
+        # Delete the previous profile picture if it exists and a new picture is being uploaded
+        if existing_instance and self.profilePicture and self.profilePicture != existing_instance.profilePicture:
+            existing_instance.profilePicture.delete(save=False)
+
+        super().save(*args, **kwargs)
 
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

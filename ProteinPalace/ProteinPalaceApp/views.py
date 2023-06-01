@@ -31,7 +31,7 @@ def browse(request):
     num = int(request.GET.get('num', 1))  # 1 is the default value
     max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
 
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.order_by('-createdAt')  # Order recipes by the 'created_at' field in descending order
     paginator = Paginator(recipes, max_recipes_per_page)
 
     page = paginator.get_page(num)
@@ -104,7 +104,7 @@ def following(request):
     max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
 
     followed_users = request.user.userprofile.following.all()
-    recipes = Recipe.objects.filter(user__in=followed_users)
+    recipes = Recipe.objects.filter(user__in=followed_users).order_by('-createdAt') 
 
     paginator = Paginator(recipes, max_recipes_per_page)
     page = paginator.get_page(num)
@@ -127,7 +127,7 @@ def myrecipes(request):
     num = int(request.GET.get('num', 1))  # 1 is the default value
     max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
 
-    recipes = Recipe.objects.filter(user=request.user)
+    recipes = Recipe.objects.filter(user=request.user).order_by('-createdAt') 
     paginator = Paginator(recipes, max_recipes_per_page)
 
     page = paginator.get_page(num)
@@ -150,7 +150,7 @@ def favorites(request):
     num = int(request.GET.get('num', 1))  # 1 is the default value
     max_recipes_per_page = 3  # Set the maximum number of recipes to display per page
 
-    recipes = request.user.userprofile.favouriteRecipes.all()
+    recipes = request.user.userprofile.favouriteRecipes.all().order_by('-createdAt') 
     paginator = Paginator(recipes, max_recipes_per_page)
 
     page = paginator.get_page(num)
