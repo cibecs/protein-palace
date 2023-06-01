@@ -19,6 +19,9 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RecipeCreateForm
 
+#added for messages
+from django.contrib import messages
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -61,7 +64,10 @@ class RecipeDetailView(DetailView):
         elif 'unfavorite' in request.POST:
             user_profile.favouriteRecipes.remove(recipe)  # Remove recipe from favorites
         elif 'follow' in request.POST:
-            user_profile.following.add(recipe.user)  # Follow the recipe's user
+            if request.user != recipe.user:
+                user_profile.following.add(recipe.user)  # Follow the recipe's user
+            else:
+                messages.warning(request, "You can't follow yourself.")
         elif 'unfollow' in request.POST:
             user_profile.following.remove(recipe.user)  # Unfollow the recipe's user
         return redirect('recipe-detail', pk=recipe.pk)

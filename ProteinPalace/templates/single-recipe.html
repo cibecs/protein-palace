@@ -47,6 +47,7 @@
 									<div class="col col-lg-12 col-xl-12">
 									  <div class="card">
 										<div class="rounded-top text-white d-flex flex-row" style="background-color: #410001; height:200px;">
+											<a href="{% url 'profile' object.user.username %}">
 											<div class=" ml-4 ms-4 mt-5 d-flex flex-column" style="width: 200px;">
 											  {% if object.user.userprofile.profilePicture %}
 											  <img src="{{ object.user.userprofile.profilePicture.url }}"
@@ -60,9 +61,14 @@
 											  style="width: 150px; z-index: 1">
 											  {% endif %}          
 										  </div>
+										  </a>
 										  <div class="ms-3" style="margin-top: 100px;">
-											<h3 style="color:white;">{{ object.user.first_name }} {{ object.user.last_name }}</h5>
-											<h6 style="color:white;">{{ object.user.username }}</h6>
+											<a href="{% url 'profile' object.user.username %}">
+												<h3 style="color:white;">{{ object.user.first_name }} {{ object.user.last_name }}</h5>
+											</a>
+											<a href="{% url 'profile' object.user.username %}">
+												<h6 style="color:white;">{{ object.user.username }}</h6>
+											</a>
 										  </div>
 										</div>
 										<div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -70,7 +76,7 @@
 										  <div class="d-flex justify-content-between text-center py-1">
 											<div class="d-flex align-items-center">
 												{% if request.user.is_authenticated %}
-												{% if request.user != recipe.user and recipe.user in request.user.userprofile.following.all %}
+												{% if recipe.user in request.user.userprofile.following.all %}
 													<form method="post">
 														{% csrf_token %}
 														<button type="submit" class="btn boxed-btn mr-1 btn-outline-danger  btn-lg" name="unfollow">Unfollow</button>
@@ -110,10 +116,12 @@
 								{% for comment in recipe.comments.all %}
 								<div class="single-comment-body">
 									<div class="comment-user-avater">
-										<img src="{{ comment.user.userprofile.profilePicture.url }}" alt="Profile Picture">
+										<a href="{% url 'profile' comment.user.username %}">
+											<img src="{{ comment.user.userprofile.profilePicture.url }}" alt="Profile Picture">
+										</a>
 									</div>
 									<div class="comment-text-body">
-										<h4>{{ comment.user.username }} <span class="comment-date">{{ comment.postedAt|date:"F d, Y" }}</span> </h4>
+										<h4> <a href="{% url 'profile' comment.user.username %}">{{ comment.user.username }}</a><span class="comment-date">{{ comment.postedAt|date:"F d, Y" }}</span> </h4>
 										<p class="h6">{{ comment.content }}</p>
 									</div>
 								</div>

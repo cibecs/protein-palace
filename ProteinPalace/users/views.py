@@ -15,6 +15,10 @@ from ProteinPalaceApp.models import Recipe
 
 from .forms import ProfilePictureForm
 
+#to get user profile
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
+
 def register(request):
     if request.method == 'POST':
         form = forms.CustomUserRegisterForm(request.POST)
@@ -34,7 +38,7 @@ def register(request):
 
 
 @login_required
-def profile(request):
+def profile(request, username):
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST, request.FILES)
         if form.is_valid():
@@ -42,16 +46,15 @@ def profile(request):
             user_profile = request.user.userprofile
             user_profile.profilePicture = profile_picture
             user_profile.save()
-            return redirect('profile')
+            return redirect('profile',username=request.user.username )
     else:
         form = ProfilePictureForm()
-
-    user = request.user
+    user = get_object_or_404(User, username=username)
+    # Additional logic for fetching user profile data or other related information
     recipes = Recipe.objects.filter(user=user).order_by('-createdAt')[:3]
-    context = {
-        'user': user,
-        'title': 'Profile',
-        'recipes': recipes,
-        'form': form
-    }
-    return render(request,'users/profile.html', context=context)
+    context = {'user': user, 
+                'title': user.username,
+                'recipes': recipes,
+                'form': form
+               }
+    return render(request, 'users/profile.html', context=context)
