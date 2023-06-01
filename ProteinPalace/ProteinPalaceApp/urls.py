@@ -12,5 +12,6 @@ urlpatterns = [
     path('recipe/comment/create/', views.create_comment, name='comment-create'), 
     path('search/', views.search, name='search'), 
     path('recipe/create/', views.RecipeCreateView.as_view(template_name = "create.html"), name = 'recipe-create'),
-    path('recipe/<int:pk>/update/', views.RecipeUpdateView.as_view(template_name = "create.html"), name = 'recipe-update')
+    path('recipe/<int:pk>/update/', views.RecipeUpdateView.as_view(template_name = "create.html"), name = 'recipe-update'),
+    path('recipe/<int:pk>/delete/', views.RecipeDeleteView.as_view(template_name = "delete.html"), name = 'recipe-delete')
 ]

@@ -58,6 +58,14 @@ class Recipe(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse('recipe-detail', args=[str(self.pk)])
+    
+    def delete(self, *args, **kwargs):
+        # Delete the image file
+        if self.image:
+            image_path = self.image.path
+            os.remove(image_path)
+
+        return super().delete(*args, **kwargs)
 
 
 class Comment(models.Model):

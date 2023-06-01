@@ -25,6 +25,10 @@ from django.contrib import messages
 #added for update recipe
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+#added for delete recipe
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+
 # Create your views here.
 def home(request):
     myDict = {
@@ -94,6 +98,16 @@ class RecipeUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+class RecipeDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model = Recipe
+
+    success_url = reverse_lazy('browse')
+
+    def test_func(self):
+        recipe = self.get_object()
+        return self.request.user == recipe.user
+
 
 def search(request):
     query = request.GET.get('query')

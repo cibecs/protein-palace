@@ -110,6 +110,14 @@
 									</div>
 								</div>														  
 						</div>
+						{% if object.user == request.user %}
+						<div class = "border mt-2 p-2" style="background-color: #f8f9fa;">
+							<div class="d-flex justify-content-end text-center py-1  ml-100 mr-100"> 
+								<a href="{% url 'recipe-update' pk=recipe.pk %}" class="btn boxed-btn btn-outline-danger btn-lg">Update</a>
+								<a href="{% url 'recipe-delete' pk=recipe.pk %}" class="btn boxed-btn ml-3 mr-2 btn-outline-danger active btn-lg">Delete</a>
+							</div>
+						</div>
+						{% endif %}
 						<div class="comments-list-wrap">
 							<h3 class="comment-count-title">{{ recipe.comments.count }} Comments</h3>
 							<div class="comment-list">
