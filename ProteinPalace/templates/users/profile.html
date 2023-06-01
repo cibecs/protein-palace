@@ -29,18 +29,35 @@
               </div>
             </div>
             <div class="p-4 text-black" style="background-color: #f8f9fa;">
-              <div class="d-flex justify-content-between text-center py-1">
+              <div class="d-flex justify-content-between text-center py-1"> 
+                {% if request.user == user %}
                 <div class="align-self-start">
-                  {% if request.user == user %}
-                  <form method="post" enctype="multipart/form-data" id="profile-picture-form" class="d-flex flex-column mt-3" action="{% url 'profile' user.username %}">
-                    {% csrf_token %}
-                    <div class="input-group mb-3 align-items-center">
-                      <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark">Upload Image</button>
-                      {{ form.profilePicture }}
-                    </div>
-                  </form>
-                  {% endif %}
+                    <form method="post" enctype="multipart/form-data" id="profile-picture-form" class="d-flex flex-column mt-3" action="{% url 'profile' user.username %}">
+                        {% csrf_token %}
+                        <div class="input-group mb-3 align-items-center">
+                            <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark">Upload Image</button>
+                            {{ form.profilePicture }}
+                        </div>
+                    </form>
                 </div>
+                {% else %}
+                <div class="d-flex align-items-center">
+                    {% if request.user.is_authenticated %}
+                    {% if request.user != user %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if user in request.user.userprofile.following.all %}
+                        <button type="submit" class="btn boxed-btn mr-1 btn-outline-danger btn-lg" name="unfollow">Unfollow</button>
+                        {% else %}
+                        <button type="submit" class="btn boxed-btn mr-1 btn-outline-danger active btn-lg" name="follow">Follow</button>
+                        {% endif %}
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn boxed-btn mr-1 btn-outline-danger active btn-lg">Follow</a>
+                    {% endif %}
+                </div>
+                {% endif %}
                 <div class="ml-auto d-flex">
                   <div class="px-3">
                     <p class="mb-1 h3">{{ user.userprofile.user.followers.count }}</p>
@@ -74,7 +91,7 @@
                                 <span class="author"><i class="fas fa-user"></i> {{ recipe.user.username }}</span>
                                 <span class="date"><i class="fas fa-calendar"></i> {{ recipe.createdAt }}</span>
                             </p>
-                            <p class="excerpt">{{ recipe.description }}</p>
+                            <p class="excerpt">{{ recipe.description |truncatechars:200 }}</p>
                             <a href="{% if recipe.pk %} {% url 'recipe-detail' recipe.pk %}{% endif %}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                         </div>
                     </div>

@@ -46,15 +46,22 @@ def profile(request, username):
             user_profile = request.user.userprofile
             user_profile.profilePicture = profile_picture
             user_profile.save()
-            return redirect('profile',username=request.user.username )
+            return redirect('profile', username=request.user.username)
+        elif 'follow' in request.POST:
+            user = get_object_or_404(User, username=username)
+            if request.user != user:
+                request.user.userprofile.following.add(user)
+        elif 'unfollow' in request.POST:
+            user = get_object_or_404(User, username=username)
+            request.user.userprofile.following.remove(user)
     else:
         form = ProfilePictureForm()
     user = get_object_or_404(User, username=username)
-    # Additional logic for fetching user profile data or other related information
     recipes = Recipe.objects.filter(user=user).order_by('-createdAt')[:3]
     context = {'user': user, 
-                'title': user.username,
-                'recipes': recipes,
-                'form': form
-               }
+               'title': user.username,
+               'recipes': recipes,
+               'form': form
+              }
     return render(request, 'users/profile.html', context=context)
+
