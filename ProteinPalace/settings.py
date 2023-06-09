@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-b978.up.railway.app',
+    'proteinpalace.up.railway.app',
 ]
 
 
