@@ -46,6 +46,7 @@ def profile(request, username):
             user_profile = request.user.userprofile
             user_profile.profilePicture = profile_picture
             user_profile.save()
+            messages.success(request, 'Your profile picture has been updated!')
             return redirect('profile', username=request.user.username)
         elif 'follow' in request.POST:
             user = get_object_or_404(User, username=username)
