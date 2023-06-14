@@ -30,7 +30,7 @@ Welcome to Protein Palace, a recipe sharing website dedicated to all things prot
 ![Homepage](/README-images/browse.png)
 
 ### Single recipe view
-![Homepage](/README-images/single recipe.png)
+![Homepage](/README-images/single-recipe.png)
 
 ### Login
 ![Homepage](/README-images/login.png)
