@@ -17,11 +17,9 @@ Welcome to Protein Palace, a recipe sharing website dedicated to all things prot
 
 7. **User Interaction**: Users can follow other users to stay updated on their latest recipe submissions and reviews. Additionally, users can like and comment on recipes.
 
-8. **Notifications**: Protein Palace provides notifications to users for activities related to their profile, such as recipe likes, comments, and new followers. This keeps users engaged and informed about the interactions happening around their profile.
+8. **Responsive Design**: The website is designed to be responsive, ensuring a seamless user experience across different devices, including desktops, tablets, and mobile phones. Template was provided by [Themewagon](https://themewagon.com/themes/free-html5-bootstrap-4-ecommerce-website-template-frutika/).
 
-9. **Responsive Design**: The website is designed to be responsive, ensuring a seamless user experience across different devices, including desktops, tablets, and mobile phones. Template was provided by [Themewagon](https://themewagon.com/themes/free-html5-bootstrap-4-ecommerce-website-template-frutika/).
-
-10. **Message Alerts**: Messages are displayed using a customized alert container that visually distinguishes between success and error messages.
+9. **Message Alerts**: Messages are displayed using a customized alert container that visually distinguishes between success and error messages.
 
 ## Screenshots
 
