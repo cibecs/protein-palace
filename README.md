@@ -24,14 +24,19 @@ Welcome to Protein Palace, a recipe sharing website dedicated to all things prot
 ## Screenshots
 
 ### Home
+![Homepage](/README-images/browse.png)
 
 ### Browse 
+![Homepage](/README-images/browse.png)
 
 ### Single recipe view
+![Homepage](/README-images/browse.png)
 
 ### Login
+![Homepage](/README-images/browse.png)
 
 ### Register
+![Homepage](/README-images/browse.png)
 
 ## Development Information
 
