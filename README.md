@@ -6,14 +6,14 @@ Welcome to Protein Palace, a recipe sharing website dedicated to all things prot
 
 1. **User Registration and Login**: Users can create an account on Protein Palace to access the full range of features. The registration process ensures secure and personalized user profiles.
 
-2. **Recipe Submission**: Registered users can share their favorite protein-rich recipes with the community. The recipe submission form includes fields for recipe name, ingredients, instructions, and an optional photo.
+2. **Recipe Submission**: Registered users can share their favorite protein-rich recipes with the community. The recipe submission form includes fields for recipe name, ingredients, instructions, and a photo.
 
-3. **Recipe Browsing**: Users can browse through a collection of recipes shared by the community. Recipes are categorized and tagged for easy navigation, allowing users to find recipes that suit their preferences.
+3. **Recipe Browsing**: Users can browse through a collection of recipes shared by the community.
 
-4. **Recipe Search**: Users can search for specific recipes or ingredients using the search functionality. This helps users find recipes based on their dietary preferences, available ingredients, or specific dietary needs.
+4. **Recipe Search**: Users can search for specific recipes or ingredients using the search functionality.
 
 5. **Adding recipe to favorites**: Users can add recipes to favorites
-6. **User Profile**: Each user has a dedicated profile page where they can view and edit their personal information, such as username, profile picture, and number of followers and followed users. The profile page also displays the user's last 3 submitted recipes.
+6. **User Profile**: Each user has a dedicated profile page where they can view their personal information, such as username, profile picture, and number of followers and followed users. The profile page also displays the user's last 3 submitted recipes.
 
 7. **User Interaction**: Users can follow other users to stay updated on their latest recipe submissions and reviews. Additionally, users can like and comment on recipes.
 
